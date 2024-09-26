@@ -1,13 +1,13 @@
-FROM ubuntu:latest AS build
+FROM amazoncorretto:17 AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
+RUN yum update -y && yum install -y maven
+WORKDIR /app
+
 COPY . .
 
-RUN apt-get install maven -y
 RUN mvn clean install
 
-FROM openjdk:22-jdk-slim
+FROM amazoncorretto:17
 
 EXPOSE 8080
 
