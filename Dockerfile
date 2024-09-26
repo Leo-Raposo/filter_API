@@ -14,8 +14,10 @@ RUN mvn clean install -DskipTests
 
 FROM amazoncorretto:17
 
+# Expor a porta 8080
 EXPOSE 8080
 
-COPY --from=build /app/target/filter_render-1.0.0.jar app.jar
+COPY --from=build /app/target/FilterAPI-0.0.1-SNAPSHOT.jar app.jar
 
+# Comando para rodar o JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
